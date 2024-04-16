@@ -21,7 +21,7 @@ namespace TrainingsOpdracht
             Oplossing = value;
         }
 
-        public int TryKillCode()
+        public virtual int TryKillCode()
         {
             if (Oplossing != -1)
             {

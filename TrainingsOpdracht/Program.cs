@@ -4,58 +4,49 @@
     {
         static void Main(string[] args)
         {
-            Virrus v = new Virrus();
-
-            List<Vaccin> vaccins = new List<Vaccin>();
-            for (int i = 0; i < 5; i++)
+            while (true)
             {
-                vaccins.Add(new Vaccin(i.ToString()));
-            }
+                Dictionary<string, VaccinatieCentrum> centraDB = new Dictionary<string, VaccinatieCentrum>();
+                Console.WriteLine("Wat wil je doen?");
+                Console.WriteLine("1. Centra tonen");
+                Console.WriteLine("2. Centrum bijmaken");
+                Console.WriteLine("3. Centra vaccins laten maken");
+                Console.WriteLine("0. STOPPEN");
+                int keuze = Convert.ToInt32(Console.ReadLine());
 
-            Vaccin Werkend = null;
-            bool vaccinGevonden = false;
-            while (v.DoomCountDown > 0 && vaccinGevonden == false)
-            {
-                foreach (Vaccin vaccin in vaccins)
+                switch (keuze)
                 {
-                    if (v.TryVaccin(vaccin) == true)
-                    {
-                        Werkend = vaccin;
-                        vaccinGevonden = true;
+                    case 1:
+                        foreach (var centrum in centraDB)
+                        {
+                            Console.WriteLine(centrum.Key);
+                        }
                         break;
-                    }
+                    case 2:
+                        Console.WriteLine("Waar wil je dit bouwen");
+                        string waar = Console.ReadLine();
+                        if (centraDB.ContainsKey(waar))
+                            Console.WriteLine("Dat land heeft reeds een centrum");
+                        else
+                            centraDB.Add(waar, new VaccinatieCentrum());
+                        Console.WriteLine("Gebouwd!");
+                        break;
+                    case 3:
+                        Console.WriteLine("Welk land moet vaccins maken?");
+                        string waarV = Console.ReadLine();
+                        if (centraDB.ContainsKey(waarV))
+                        {
+                            Vaccin gemaaktVaccin = centraDB[waarV].GeefVaccin();
+                            Console.WriteLine("Vaccin gemaakt");
+                            //nu iets doen met het gemaaktVaccin
+                        }
+                        else
+                            Console.WriteLine("Dat land heeft geen vaccinatiecentrum");
+                        break;
+                    default:
+                        Console.WriteLine("Onbekend getal");
+                        break;
                 }
-            }
-            //fase 2
-            if (vaccinGevonden)
-            {
-                Werkend.ToonInfo();
-                VaccinatieCentrum.BewaarVaccin(Werkend.Oplossing);
-
-                List<VaccinatieCentrum> centra = new List<VaccinatieCentrum>();
-                for (int i = 0; i < 5; i++)
-                {
-                    centra.Add(new VaccinatieCentrum());
-                }
-
-                List<Vaccin> containerVaccins = new List<Vaccin>();
-                foreach (var centrum in centra)
-                {
-                    for (int i = 0; i < 7; i++)
-                    {
-                        containerVaccins.Add(centrum.GeefVaccin());
-                    }
-                }
-
-                for (int i = 0; i < containerVaccins.Count; i++)
-                {
-                    Console.Write(i);
-                    containerVaccins[i].ToonInfo();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Gedaan");
             }
         }
     }

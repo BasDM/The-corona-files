@@ -16,11 +16,11 @@ namespace TrainingsOpdracht
         public int DoomCountDown
         {
             get { return doomCountdown; }
-            private set
+            set
             {
                 if (value <= 0)
                 {
-                    Console.WriteLine($"Game over");
+                    Console.WriteLine("Game over");
                 }
                 doomCountdown = value;
             }
@@ -42,7 +42,7 @@ namespace TrainingsOpdracht
             randomNaam += rng.Next(1, 100);
             return randomNaam;
         }
-        public bool TryVaccin(Vaccin vaccinPoging)
+        public virtual bool TryVaccin(Vaccin vaccinPoging)
         {
             bool resultaat = false;
             int poging = vaccinPoging.TryKillCode();
@@ -60,5 +60,6 @@ namespace TrainingsOpdracht
         {
             Console.WriteLine($"Naam:{Naam}");
         }
+
     }
 }
