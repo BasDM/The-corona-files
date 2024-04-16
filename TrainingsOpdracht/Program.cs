@@ -7,8 +7,8 @@
             while (true)
             {
                 Dictionary<string, VaccinatieCentrum> centraDB = new Dictionary<string, VaccinatieCentrum>();
-                Console.WriteLine("0. STOPPEN");
                 Console.WriteLine("Wat wil je doen?");
+                Console.WriteLine("0. STOPPEN");
                 Console.WriteLine("1. Centra tonen");
                 Console.WriteLine("2. Centrum bijmaken");
                 Console.WriteLine("3. Centra vaccins laten maken");
